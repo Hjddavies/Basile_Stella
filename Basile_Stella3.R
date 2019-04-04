@@ -43,3 +43,41 @@ word_count %>% slice(1:20) %>%
   xlab("words") + 
   ylab("word count") + 
   ggtitle("how many times do certain words appear?")
+
+#adding stop words to plotting 
+#(largely from http://utstat.toronto.edu/~nathan/teaching/sta4002/Class1/scrapingtwitterinR-NT.html)
+my_stop_words <- stop_words %>% select(-lexicon) %>%
+  bind_rows(data.frame(
+    word = c(
+      "https",
+      "t.co",
+      "stellacreasy",
+      "a",
+      "to",
+      "theresa_may",
+      "stella",
+      "10downingstreet",
+      "it's",
+      "mp",
+      "amp",
+      "is",
+      "it",
+      "on",
+      "that",
+      "for",
+      "be",
+      "not",
+      "it's",
+      "jessphillips",
+      "mrjamesbob",
+      "bbcpolitics",
+      "labour",
+    )
+  ))
+
+#secondary plotting after stop words
+tweet_words_interesting <- tweet_words %>% anti_join(my_stop_words)
+
+tweet_words_interesting %>% group_by(word) %>% tally(sort = TRUE) %>% slice(1:25) %>% 
+  ggplot(aes(x = reorder(word, n, function(n) - n), y = n)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 60,
+                                                                                                                             hjust = 1)) + xlab("")
