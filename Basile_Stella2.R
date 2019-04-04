@@ -19,3 +19,8 @@ options(httr_oauth_cache=TRUE)
 #fix found on https://stackoverflow.com/questions/29634342/unable-to-use-the-setup-twitter-oauth-function-in-r-to-work-with-twitter
 twitteR:::setup_twitter_oauth(consumer_key = consumerKey, consumer_secret = consumerSecret,
                     access_token = accessToken, access_secret = accessSecret)
+
+tweetstostella <-
+  searchTwitter("stellacreasy exclude:retweets", n = 3200)
+tweetstostella_df <- twListToDF(tweetstostella)
+tweet_words <- tweetstostella_df %>% select(id, text) %>% unnest_tokens(word,text)
