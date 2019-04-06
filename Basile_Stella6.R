@@ -132,6 +132,46 @@ bing_word_counts %>%
   ggplot(aes(word, n, fill = sentiment)) +
   geom_col(show.legend = FALSE) +
   facet_wrap( ~ sentiment, scales = "free_y") +
-  labs(y = "Contribution to sentiment",
+  labs(y = "Contribution to sentiment", 
        x = NULL) +
   coord_flip()
+
+#check on gendered abuse on csv file - little interesting 
+#but words to do with betrayal?
+betrayal_words <- tweet_words_interesting %>% filter(str_detect(word, "^betray"))
+
+traitor_words <- tweet_words_interesting %>% filter(str_detect(word, "^traito") | str_detect(word, "^treason"))
+
+hypoocrite_words <- tweet_words_interesting %>% filter(str_detect(word, "^hypocr"))
+
+deception_words <- tweet_words_interesting %>% filter(str_detect(word, "^decei"))
+
+liar_words <- tweet_words_interesting %>% filter(str_detect(word, "^liar") | str_detect(word, "^lying"))
+
+abuse_words <- bind_rows(betrayal_words, traitor_words, hypoocrite_words, deception_words, liar_words)
+
+word_count_of_abuse <- data.frame(type_of_abuse = character(), count = integer())
+
+word_count_of_abuse <-rbind(word_count_of_abuse, list(type_of_abuse = "betrayal words", count = nrow(betrayal_words)),stringsAsFactors=FALSE) 
+word_count_of_abuse <-rbind(word_count_of_abuse, list(type_of_abuse = "traitor words", count = nrow(traitor_words)),stringsAsFactors=FALSE) 
+word_count_of_abuse <-rbind(word_count_of_abuse, list(type_of_abuse = "hypocritical words ", count = nrow(hypoocrite_words)),stringsAsFactors=FALSE) 
+word_count_of_abuse <-rbind(word_count_of_abuse, list(type_of_abuse = "lying words", count = nrow(liar_words)),stringsAsFactors=FALSE) 
+word_count_of_abuse <-rbind(word_count_of_abuse, list(type_of_abuse = "deception words ", count = nrow(deception_words)),stringsAsFactors=FALSE) 
+
+wordstheme <- theme(plot.title = element_text(colour = "steelblue", size = 20, hjust = 0.5), 
+                    axis.text.x = element_text(colour = "steelblue",angle = 60, hjust = 1),
+                    axis.text.y = element_text(colour = "steelblue",angle = 45, hjust = 1),
+                    axis.title.x = element_text(colour = "steelblue"),
+                    axis.title.y = element_text(colour = "steelblue"),
+)
+
+#plotting abuse
+word_count_of_abuse %>%
+  ggplot(aes(x = reorder(type_of_abuse, count, function(n) - n), y = count, fill = type_of_abuse)) + 
+  geom_bar(stat="identity",color = "red") + 
+  scale_fill_brewer() +
+  wordstheme +
+  xlab("Abuse") + 
+  ylab("Word Count") + 
+  ggtitle("Treasonous Tweets") +
+  theme(legend.position = "none")
