@@ -213,7 +213,7 @@ abuse_words %>% group_by(word) %>% tally() %>%
   geom_point(stat = "identity", colour = "red") + 
   theme(axis.text.x = element_text(angle = 70, hjust = 1)) + xlab("")
 
-#Making lollipop graphs - Senders
+#Making lollipop graphs - Frequency of senders of tweets
 merged.data2 %>%
   group_by(screenName) %>% tally() %>%
   group_by(screenName) %>% tally(sort = TRUE) %>% slice(1:15) %>% 
