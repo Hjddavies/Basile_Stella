@@ -171,19 +171,10 @@ abuse_words %>% group_by(word) %>% tally(sort = TRUE) %>% slice(1:20) %>%
     - n), y = n)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 60,
                                                                                    hjust = 1)) + xlab("")
 
-#various other experiments with the binded rows give us various changes of colours, frames etc. (see Rplot5i, ii, iii, iv) then we do this:
+#various other experiments with the binded rows give us various changes of colours, frames etc,
+#(see Rplot5i, ii, iii, iv) then for final version, see Basile_Stella6 and associated graph Rplot6(Final)
 
-#http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
-#plus stackoverflow.com to remove legend
-word_count_of_abuse %>%
-  ggplot(aes(x = reorder(type_of_abuse, count, function(n) - n), y = count, fill = type_of_abuse)) + 
-  geom_bar(stat="identity",color = "red") + 
-  scale_fill_brewer() +
-  wordstheme +
-  xlab("Abuse") + 
-  ylab("Word Count") + 
-  ggtitle("Treasonous Tweets") +
-  theme(legend.position = "none")
+
 
 
 
