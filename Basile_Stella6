@@ -168,8 +168,12 @@ wordstheme <- theme(plot.title = element_text(colour = "steelblue", size = 20, h
 #We can of course do a simple plot of the abusive words used:
 abuse_words %>% group_by(word) %>% tally(sort = TRUE) %>% slice(1:20) %>%
   ggplot(aes(x = reorder(word, n, function(n)
-    - n), y = n)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 60,
-                                                                                   hjust = 1)) + xlab("")
+    - n), y = n)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + xlab("")
+
+#various other experiments with the binded rows give us various changes of colours, frames etc,
+#(see Rplot5i, ii, iii, iv) then for final version, see Basile_Stella6 and associated graph Rplot6(Final).
+
+
 #a more sophisticated take on this:
 #http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
 #plus stackoverflow.com to remove legend
