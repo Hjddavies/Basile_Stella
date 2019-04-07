@@ -172,7 +172,7 @@ abuse_words %>% group_by(word) %>% tally(sort = TRUE) %>% slice(1:20) %>%
                                                                                    hjust = 1)) + xlab("")
 
 #various other experiments with the binded rows give us various changes of colours, frames etc,
-#(see Rplot5i, ii, iii, iv) then for final version, see Basile_Stella6 and associated graph Rplot6(Final)
+#(see Rplot5i, ii, iii, iv) then for final version, see Basile_Stella6 and associated graph Rplot6(Final).
 
 
 
