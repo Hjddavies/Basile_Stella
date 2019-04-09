@@ -1,0 +1,28 @@
+#Had to do extra chart for better sentiment analysis vizualisation!
+
+# Simple Pie Chart test
+slices <- c(10, 12,4, 16, 8)
+lbls <- c("US", "UK", "Australia", "Germany", "France")
+pie(slices, labels = lbls, main="Pie Chart of Countries")
+
+library(plotrix)
+slices <- c(4782, 2006, 3324, 2313) 
+lbls <- c("Bing Negative", "Bing Positive", "NRC Negative", "NCR Positive")
+pie3D(slices,labels=lbls,explode=0.1,
+      main="Bing and NCR Sentiment ")
+
+mytable <- table(iris$Species)
+lbls <- paste(names(mytable), "\n", mytable, sep="")
+pie(mytable, labels = lbls, 
+    main="Pie Chart of Species\n (with sample sizes)")
+
+library(treemap)
+group = c("Bing Negative", "Bing Positive", "NRC Negative", "NCR Positive")
+value = c(4782, 2006, 3324, 2313)
+data = data.frame(group, value)
+
+treemap(data, index="group",  
+        vSize="value",
+        type = "index",
+        border.col=c("white")
+        )
