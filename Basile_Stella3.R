@@ -1,3 +1,5 @@
+Initial ideas from https://www.interhacktives.com/2017/01/25/scrape-tweets-r-journalists/ by Ryan Watts+Twitter API
+
 library(stringr)
 library(twitteR)
 library(purrr)
