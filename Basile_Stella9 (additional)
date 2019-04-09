@@ -24,5 +24,6 @@ data = data.frame(group, value)
 treemap(data, index="group",  
         vSize="value",
         type = "index",
+        title = "Sentiment Analysis",
         border.col=c("white")
         )
