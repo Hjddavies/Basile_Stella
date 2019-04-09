@@ -23,7 +23,7 @@ twitteR:::setup_twitter_oauth(consumer_key = consumerKey, consumer_secret = cons
 #Scraping replies to Creasy
 tweetstostella2 <- searchTwitter("@stellacreasy exclude:retweets", n=3200)
 tweetstostella2_df <- tbl_df(map_df(tweetstostella2, as.data.frame))
-write.csv(futureexwife_df, "tweetstostella2.csv")
+write.csv(tweetstostella2_df, "tweetstostella2.csv")
 
 tweetstostella2_df <- twListToDF(tweetstostella2)
 tweet_words <- tweetstostella2_df %>% select(id, text) %>% unnest_tokens(word,text)
